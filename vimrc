@@ -2,11 +2,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/dracula/vim.git'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/kien/ctrlp.vim'
-Plug 'https://github.com/vim-airline/vim-airline.git'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/tpope/vim-fugitive'
 call plug#end()
 
 syntax on
 filetype indent plugin on
+filetype detect
 color dracula
 set nocompatible
 set nowrap
@@ -30,12 +32,10 @@ let NERDTreeShowHidden=1
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'dracula'
-let g:airline#extensions#tabline#enabled = 0 
+"let g:airline#extensions#tabline#enabled = 0 
 let g:airline#extensions#branch#enabled = 1 
-let g:airline_section_warning = '' 
-let g:airline_section_y = '' 
-let g:airline_section_x = '' 
-set laststatus=2 " for airline
+"let g:airline_section_warning = '' 
+"set laststatus=2 " for airline
 
 let mapleader=","
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
