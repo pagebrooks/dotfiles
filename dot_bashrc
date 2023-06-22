@@ -92,6 +92,9 @@ alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias myip='curl https://ipinfo.io/json'
+alias weather='curl https://wttr.in'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -113,3 +116,7 @@ if ! shopt -oq posix; then
 fi
 
 
+Z_FILE=/home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
+if [[ -f "$Z_FILE" ]]; then
+	. "$Z_FILE"
+fi

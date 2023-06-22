@@ -1,10 +1,13 @@
 #!/bin/bash
 
+{{ if ne .usbUnlock "Y" }}
+exit
+{{ end }}
+
 echo "Configuring LUKS automatic unlock with USB drive"
 read -p "Please ensure the USB drive is inserted and Press enter to continue..."
 
 echo "Generating random key"
-apt install uuid -y
 unique_id=$(uuid)
 dd if=/dev/urandom bs=1 count=256 > $unique_id.lek
 echo "$unique_id.lek has been generated"
