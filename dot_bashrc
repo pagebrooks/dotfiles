@@ -120,3 +120,7 @@ Z_FILE=/home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
 if [[ -f "$Z_FILE" ]]; then
 	. "$Z_FILE"
 fi
+
+if [[ -f /home/linuxbrew/.linuxbrew/bin/oh-my-posh ]]; then
+	eval "$(oh-my-posh init bash)"
+fi

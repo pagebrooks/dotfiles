@@ -29,6 +29,7 @@ fi
 
 brew install \
 	bat \
+	jandedobbeleer/oh-my-posh/oh-my-posh \
 	neofetch \
 	neovim \
 	htop \
@@ -37,3 +38,10 @@ brew install \
 	zellij \
 	lolcat \
 	cowsay
+
+echo 'Installing nerd-fonts'
+git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
+pushd nerd-fonts
+./install.sh
+popd
+rm -rf -- nerd-fonts
