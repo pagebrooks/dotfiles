@@ -23,6 +23,8 @@ fi
 which brew
 if [[ $? != 0 ]]; then
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/page/.profile
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
 	brew update
 fi
@@ -39,9 +41,13 @@ brew install \
 	lolcat \
 	cowsay
 
-echo 'Installing nerd-fonts'
-git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
-pushd nerd-fonts
-./install.sh
-popd
-rm -rf -- nerd-fonts
+if [ -d "~/.local/share/fonts/NerdFonts" ]; then
+	echo 'Installing nerd-fonts'
+	git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
+	pushd nerd-fonts
+	./install.sh
+	popd
+	rm -rf -- nerd-fonts
+else
+	echo 'nerd-fonts already installed'
+fi
