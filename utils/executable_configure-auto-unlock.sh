@@ -1,9 +1,5 @@
 #!/bin/bash
 
-{{ if ne .usbUnlock "Y" }}
-exit
-{{ end }}
-
 echo "Configuring LUKS automatic unlock with USB drive"
 read -p "Please ensure the USB drive is inserted and Press enter to continue..."
 
@@ -20,11 +16,11 @@ cryptsetup luksAddKey /dev/nvme0n1p3 $unique_id.lek
 
 rm $unique_id.lek
 
-echo "Copying auto-unlock script to /bin"
-cp auto-unlock /bin
+echo "Copying auto-unlock.sh script to /bin"
+cp auto-unlock.sh /bin
 
 echo "Copying recovery script to /bin"
-cp recover-initramfs /bin
+cp recover-initramfs.sh /bin
 
 echo "Updating /etc/crypttab with keyscript and USB drive/file info"
 sed -i "s/none/\/dev\/disk\/by\-label\/key:\/$unique_id.lek/" /etc/crypttab

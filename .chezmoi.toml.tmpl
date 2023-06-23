@@ -1,6 +1,4 @@
-{{- $usbUnlock := promptString "usbUnlock" "N" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
 [data]
 email = {{ $email | quote }}
-usbUnlock = {{ $usbUnlock | quote }}
