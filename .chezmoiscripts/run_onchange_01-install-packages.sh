@@ -23,23 +23,13 @@ fi
 which brew
 if [[ $? != 0 ]]; then
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/page/.profile
+	(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.profile
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 else
 	brew update
 fi
 
-brew install \
-	bat \
-	jandedobbeleer/oh-my-posh/oh-my-posh \
-	neofetch \
-	neovim \
-	htop \
-	ripgrep \
-	z \
-	zellij \
-	lolcat \
-	cowsay
+brew install bat jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
 
 if [ -d "~/.local/share/fonts/NerdFonts" ]; then
 	echo 'Installing nerd-fonts'
