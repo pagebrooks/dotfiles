@@ -24,7 +24,7 @@ cp recover-initramfs.sh /bin
 
 echo "Updating /etc/crypttab with keyscript and USB drive/file info"
 sed -i "s/none/\/dev\/disk\/by\-label\/key:\/$unique_id.lek/" /etc/crypttab
-sed -i "s/discard/keyscript=\/bin\/auto-unlock/" /etc/crypttab
+sed -i "s/discard/keyscript=\/bin\/auto-unlock\.sh/" /etc/crypttab
 
 echo "Adding modules to /etc/initramfs-tools/modules file"
 echo 'vfat' >> /etc/initramfs-tools/modules
