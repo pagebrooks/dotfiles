@@ -95,6 +95,9 @@ alias l='ls -CF'
 alias myip='curl https://ipinfo.io/json'
 alias weather='curl https://wttr.in'
 
+alias vi='nvim'
+alias vim='nvim'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
