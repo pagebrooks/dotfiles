@@ -29,7 +29,6 @@ else
 	brew update
 fi
 
-brew install bat jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
 
 if [ -d "~/.local/share/fonts/NerdFonts" ]; then
 	echo 'Installing nerd-fonts'
@@ -41,3 +40,6 @@ if [ -d "~/.local/share/fonts/NerdFonts" ]; then
 else
 	echo 'nerd-fonts already installed'
 fi
+
+brew install bat jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
+
