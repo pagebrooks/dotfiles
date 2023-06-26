@@ -41,5 +41,5 @@ else
 	echo 'nerd-fonts already installed'
 fi
 
-brew install bat jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
+brew install bat gh jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
 
