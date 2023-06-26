@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "{{ .email }}"
+git config --global user.name "Page Brooks"
+git config --global user.email {{ .email }}
+git config --list
+
+gh auth login --web
+
