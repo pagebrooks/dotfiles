@@ -30,7 +30,7 @@ else
 fi
 
 
-if [ -d "~/.local/share/fonts/NerdFonts" ]; then
+if [ ! -d "~/.local/share/fonts/NerdFonts" ]; then
 	echo 'Installing nerd-fonts'
 	git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
 	pushd nerd-fonts
