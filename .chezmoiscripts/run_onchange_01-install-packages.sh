@@ -3,10 +3,19 @@
 sudo apt update
 sudo apt upgrade
 sudo apt install -y \
-	uuid \
-	jq \
+	alsa-utils \
+	bc \
 	build-essential \
-	curl
+	curl \
+	dwm \
+	firefox \
+	jq \
+	lightdm \
+	nala \
+	pulseaudio \
+	uuid \
+	xclip \
+	xbindkeys
 
 # Install 1Password
 which 1password
@@ -40,16 +49,30 @@ else
 fi
 
 
-if [ ! -d "~/.local/share/fonts/NerdFonts" ]; then
-	echo 'Installing nerd-fonts'
-	git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
-	pushd nerd-fonts
-	./install.sh
-	popd
-	rm -rf -- nerd-fonts
-else
-	echo 'nerd-fonts already installed'
-fi
+# Nerdfonts isn't working right now
+#if [ ! -d "~/.local/share/fonts/NerdFonts" ]; then
+#	echo 'Installing nerd-fonts'
+#	git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1
+#	pushd nerd-fonts
+#	./install.sh
+#	popd
+#	rm -rf -- nerd-fonts
+#else
+#	echo 'nerd-fonts already installed'
+#fi
 
-brew install bat gh jandedobbeleer/oh-my-posh/oh-my-posh neofetch neovim htop ripgrep z zellij lolcat cowsay
+brew install \
+	bat \
+	cowsay \
+	gh \
+	lolcat \
+	neofetch \
+	neovim \
+	htop \
+	ripgrep \
+	tldr \
+	z \
+	zellij
 
+	# commented out until nerdfonts is fixed
+	#jandedobbeleer/oh-my-posh/oh-my-posh \

@@ -97,6 +97,7 @@ alias weather='curl https://wttr.in'
 
 alias vi='nvim'
 alias vim='nvim'
+alias apt='nala'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -127,3 +128,5 @@ fi
 if [[ -f /home/linuxbrew/.linuxbrew/bin/oh-my-posh ]]; then
 	eval "$(oh-my-posh init bash)"
 fi
+
+xbindkeys --poll-rc
