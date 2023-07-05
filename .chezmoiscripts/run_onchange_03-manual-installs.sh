@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # Install 1Password
 which 1password
 if [[ $? != 0 ]]; then

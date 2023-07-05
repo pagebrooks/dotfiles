@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 # Install Homebrew
 which brew
 if [[ $? != 0 ]]; then

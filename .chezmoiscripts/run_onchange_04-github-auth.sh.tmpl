@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 echo "{{ .email }}"
 git config --global user.name "Page Brooks"
 git config --global user.email {{ .email }}

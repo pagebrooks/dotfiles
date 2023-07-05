@@ -1,0 +1,11 @@
+# ls aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias myip='curl https://ipinfo.io/json'
+alias weather='curl https://wttr.in'
+
+alias vi='nvim'
+alias vim='nvim'
+alias apt='nala'
