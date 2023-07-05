@@ -14,9 +14,11 @@ sudo apt install -y \
 	git \
 	jq \
 	lightdm \
+ 	locate \
 	nala \
 	pulseaudio \
 	uuid \
 	xclip \
 	xbindkeys
 
+sudo updatedb
