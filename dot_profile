@@ -32,6 +32,11 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/oh-my-posh ]]; then
         eval "$(oh-my-posh init bash)"
 fi
 
-. /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
+if [[ -f /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh ]]; then
+	. /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh
+fi
 
-xbindkeys --poll-rc
+which xbindkeys
+if [[ $? != 0 ]]; then
+	xbindkeys --poll-rc
+fi

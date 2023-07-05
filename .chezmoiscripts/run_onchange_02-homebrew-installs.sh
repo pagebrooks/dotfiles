@@ -40,3 +40,5 @@ brew install \
 
 	# commented out until nerdfonts is fixed
 	#jandedobbeleer/oh-my-posh/oh-my-posh \
+	
+. ~/.profile
