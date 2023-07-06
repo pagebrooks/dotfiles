@@ -34,6 +34,6 @@ if [[ -f /home/linuxbrew/.linuxbrew/etc/profile.d/z.sh ]]; then
 fi
 
 which xbindkeys
-if [[ $? != 0 ]]; then
+if [[ $? == 0 ]]; then
 	xbindkeys --poll-rc
 fi
