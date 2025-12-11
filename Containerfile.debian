@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1
+
+FROM debian:bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    TZ=Etc/UTC
+
+# Base packages and sudo for non-root user
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    sudo \
+    bash \
+    ca-certificates \
+    curl \
+    git \
+    xz-utils \
+    build-essential \
+    gnupg \
+    locales \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configure locale
+RUN sed -i 's/^# \(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
+
+# Create a non-root user with passwordless sudo
+ARG USER=dev
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} ${USER} && \
+    useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USER} && \
+    echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-${USER} && \
+    chmod 0440 /etc/sudoers.d/90-${USER}
+
+USER ${USER}
+WORKDIR /home/${USER}/workspace
+
+# Copy dotfiles into the container (adjust path if needed)
+# Using build context root; Containerfile should live at repo root
+COPY . /home/${USER}/workspace
+
+# Auto-run setup script on container start
+# Uses non-root user with passwordless sudo for apt installs
+ENTRYPOINT ["bash"]
+CMD []
