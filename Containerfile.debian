@@ -8,6 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Base packages and sudo for non-root user
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
+    stow \
     bash \
     ca-certificates \
     curl \

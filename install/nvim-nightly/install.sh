@@ -1,4 +1,4 @@
-set -euo pipefail
+#!/usr/bin/env bash
 
 # Paths
 OPT_DIR="$HOME/.local/opt/nvim-nightly"
@@ -14,7 +14,7 @@ mkdir -p "$HOME/.local/bin" "$OPT_DIR" "$STOW_DIR"
 
 # Fetch latest nightly tarball
 curl -fL -o /tmp/nvim-linux-x86_64.tar.gz \
-	https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+	https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
 
 # Extract into ~/.local/opt/nvim-nightly
 rm -rf "$OPT_DIR"/*
@@ -34,6 +34,5 @@ chmod +x "$PKG_DIR/bin/nvim"
 # Remove previous stow links for this package, then stow fresh
 stow -D -t "$HOME/.local" -d "$STOW_DIR" "$PKG_NAME" || true
 stow -t "$HOME/.local" -d "$STOW_DIR" "$PKG_NAME"
-
 
 echo "Installed nvim nightly via Stow. Run: nvim"

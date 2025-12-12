@@ -14,13 +14,10 @@ shopt -s globstar
 export EDITOR="vim"
 
 # Aliases
-alias cat='batcat'
-alias cd='z'
-alias eza='eza --icons --git'
 alias la='eza -a'
 alias ll='eza -l'
 alias lla='eza -la'
-alias ls='eza'
+# alias ls='eza'
 alias lt='eza --tree'
 alias mktmpd='cd $(mktemp -d)'
 alias mktmpf='$EDITOR $(mktemp)'
@@ -33,3 +30,5 @@ alias vim='nvim'
 alias vi='nvim'
 alias myprofile='nvim ~/.bashrc'
 alias weather='curl https://wttr.in'
+
+export PATH="$HOME/.local/bin:$PATH"
