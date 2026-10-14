@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Symlink this repo's files into $HOME. Safe to re-run: links that are already right are skipped,
+# and anything real that is in the way is moved to <path>.bak-<timestamp>.
+set -euo pipefail
+
+dotfiles=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+stamp=$(date +%Y%m%d-%H%M%S)
+
+link() { # link <repo-relative source> <absolute target>
+    local src="$dotfiles/$1" dst="$2"
+    if [ -L "$dst" ] && [ "$(readlink -f "$dst")" = "$src" ]; then
+        echo "ok      $dst"
+        return
+    fi
+    if [ -e "$dst" ] || [ -L "$dst" ]; then
+        mv "$dst" "$dst.bak-$stamp"
+        echo "backup  $dst -> $dst.bak-$stamp"
+    fi
+    mkdir -p "$(dirname "$dst")"
+    ln -s "$src" "$dst"
+    echo "linked  $dst -> $src"
+}
+
+link home/bashrc             "$HOME/.bashrc"
+link home/gitconfig          "$HOME/.gitconfig"
+link home/tmux.conf          "$HOME/.tmux.conf"
+link config/nvim             "$HOME/.config/nvim"      # whole dir: vim.pack rewrites the lockfile in place
+link config/tmux             "$HOME/.config/tmux"
+link config/git/ignore       "$HOME/.config/git/ignore"
+link config/mise/config.toml "$HOME/.config/mise/config.toml"
+
+[ -f "$HOME/.bashrc.local" ] || echo "note: no ~/.bashrc.local; create it for secrets and machine-specific settings"

@@ -1,0 +1,37 @@
+{
+  "plugins": {
+    "fzf-lua": {
+      "rev": "ce788d5acb83628c66f6639920ec0f36576646d7",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
+    "gitsigns.nvim": {
+      "rev": "fd780920613e541cbdfac41bf711583ed49f9249",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
+    "mini.statusline": {
+      "rev": "14919901649d20d020e659c63c03baa75cd94f33",
+      "src": "https://github.com/nvim-mini/mini.statusline"
+    },
+    "nvim-treesitter": {
+      "rev": "b6271b678e035a5cbf62d637364f3eeca0890171",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "roslyn.nvim": {
+      "rev": "bf1bd4e70bc7068d1b4aebf4ce03cc19a86615be",
+      "src": "https://github.com/seblyng/roslyn.nvim"
+    },
+    "vague.nvim": {
+      "rev": "dba28050887c2810b5ebf9e0143b4e919bd55757",
+      "src": "https://github.com/vague-theme/vague.nvim"
+    },
+    "vim": {
+      "rev": "d4b0823100c702af127cba8dd5595a8f599041ec",
+      "src": "https://github.com/dracula/vim.git"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
+    }
+  }
+}
