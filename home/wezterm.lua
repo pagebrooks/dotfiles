@@ -9,7 +9,7 @@ config.window_padding = {
   bottom = 0
 }
 -- JetBrains Mono ships inside wezterm, so a machine without the Nerd Font still gets a sane font
-config.font = wezterm.font_with_fallback { 'MesloLGSNerdFontMono', 'JetBrains Mono' }
+config.font = wezterm.font_with_fallback { 'MesloLGS Nerd Font Mono', 'JetBrains Mono' }
 config.color_scheme = "Dracula (Official)"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
