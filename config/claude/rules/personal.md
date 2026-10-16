@@ -15,7 +15,7 @@
 
 ## Git Workflow
 - Prefer git work trees and feature branches
-- Create worktrees nested under the current repository under ./claude/worktrees
+- Create worktrees nested under the current repository in .claude/worktrees
 - Branch naming convention is: feature/pb/feature-name
 - I do my own commits and pushes. Make the edits and leave them uncommitted, then
   tell me the worktree, the branch, and what changed. Do not commit, push, merge,
