@@ -5,6 +5,7 @@ set -euo pipefail
 
 bin="$HOME/.local/bin"
 mkdir -p "$bin"
+export PATH="$bin:$PATH" # fd, bat, mise land here; a fresh shell may not have it yet
 on_wsl=${WSL_DISTRO_NAME:-}
 
 pkgs=(git curl ca-certificates build-essential unzip ripgrep fd-find bat tmux gh jq htop bc)

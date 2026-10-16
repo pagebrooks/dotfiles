@@ -11,6 +11,7 @@ install/deps.sh            # apt packages, fd/bat symlinks, mise, fzf; on WSL al
 install/nvim.sh            # Neovim release into ~/.local (stable | nightly | vX.Y.Z)
 install/tree-sitter-cli.sh # tree-sitter CLI; nvim-treesitter needs it to build parsers
 ./link.sh                  # symlinks; backs up anything real that is in the way
+~/.local/bin/mise install  # go and node pinned in config/mise/config.toml
 install/wezterm.sh         # optional: wezterm from its apt repo (not on WSL)
 install/claude-code.sh     # optional: Claude Code
 ```
