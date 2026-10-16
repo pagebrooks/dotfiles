@@ -1,12 +1,29 @@
 [user]
 	name = Page Brooks
 	# email, signingkey and credential helpers differ per machine: see ~/.gitconfig.local
+[core]
+	autocrlf = input
+	ignorecase = false
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
 [gpg]
 	format = ssh
 [commit]
 	gpgsign = true
 [init]
 	defaultBranch = main
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+# Merged from this repo and the WSL work machine; all commented out until reviewed.
+# Work-only ones (ch, up, pr, repo) are in the work machine's ~/.gitconfig.local.
+[alias]
+	#lg = log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	#ca = commit --amend --no-edit
+	#st = status
+	#f  = fetch
 # per-machine settings, last so they can override anything above (e.g. gpgsign = false at work)
 [include]
 	path = ~/.gitconfig.local

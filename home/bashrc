@@ -8,6 +8,12 @@ case $- in
       *) return;;
 esac
 
+# Start tmux in every new terminal tab; each tab gets its own session. Not in VS Code's terminal.
+if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ] && [[ "$TERM" != screen* ]] && [[ "$TERM" != tmux* ]] &&
+    [ -z "$VSCODE_INJECTION" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+    exec tmux new-session
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -87,24 +93,48 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
 export EDITOR=nvim
 export VISUAL=nvim
-alias vi='nvim'
-alias vim='nvim'
-alias ta='tmux attach -t'
-alias tn='mkdir -p /tmp/tmux-$(id -u) && tmux new -s'
-alias tl='tmux ls'
-alias mktmpd='cd "$(mktemp -d)"'
-alias mktmpf='$EDITOR "$(mktemp)"'
-alias myip='curl -sSL api.ipify.org; echo'
-alias myip6='curl -sSL api6.ipify.org; echo'
-alias weather='curl https://wttr.in'
-alias newguid='cat /proc/sys/kernel/random/uuid'
 
+# === Aliases ===
+# Merged from this repo and the WSL work machine; all commented out until reviewed.
+# Work-only ones (ops, nnuke, update-all, rgl) are in the work machine's ~/.bashrc.local.
+
+# ls
+#alias ll='ls -l'
+#alias la='ls -A'
 #alias l='ls -CF'
+
+# editor
+#alias vi='nvim'
+#alias vim='nvim'
+#alias myprofile='nvim ~/.bashrc'
+
+# tmux
+#alias ta='tmux attach -t'
+#alias tn='mkdir -p /tmp/tmux-$(id -u) && tmux new -s'
+#alias tl='tmux ls'
+
+# git (glol is the same idea as `git lg` in gitconfig)
+#alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+#alias gnuke='git fetch --prune && git --no-pager branch --no-color -vv | grep ": gone\]" | awk '\''{print $1}'\'' | xargs git branch -D'
+#alias gpush='ref=$(git symbolic-ref --quiet HEAD) && git push --set-upstream origin ${ref#refs/heads/}'
+
+# scratch files and misc
+#alias mktmpd='cd "$(mktemp -d)"'
+#alias mktmpf='$EDITOR "$(mktemp)"'
+#alias myip='curl -sSL api.ipify.org; echo'     # work machine had: echo "$(curl -sSL api.ipify.org)"
+#alias myip6='curl -sSL api6.ipify.org; echo'
+#alias weather='curl https://wttr.in'
+#alias newguid='cat /proc/sys/kernel/random/uuid' # work machine had: uuidgen (needs the uuid-runtime package)
+#alias motd='run-parts /etc/update-motd.d'
+
+# Claude Code without a project: ~/chat is empty and not a git repo, so only ~/.claude/CLAUDE.md applies.
+#   chat          interactive session; chat -c continues the last one
+#   ask "..."     one-shot answer printed in this shell
+# Both run in a subshell, so the current directory never changes.
+#chat() { ( mkdir -p "$HOME/chat" && cd "$HOME/chat" && exec claude "$@" ); }
+#ask()  { ( mkdir -p "$HOME/chat" && cd "$HOME/chat" && claude -p "$*" ); }
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like

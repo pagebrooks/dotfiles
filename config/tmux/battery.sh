@@ -1,4 +1,6 @@
 #!/bin/bash
+# Laptop only: under WSL the battery is the Windows host's, so show nothing
+grep -qi microsoft /proc/sys/kernel/osrelease 2>/dev/null && exit 0
 cap=$(cat /sys/class/power_supply/BAT0/capacity 2>/dev/null)
 status=$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)
 [ -z "$cap" ] && exit 0

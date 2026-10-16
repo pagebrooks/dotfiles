@@ -19,6 +19,16 @@ sudo apt-get install -y -q "${pkgs[@]}"
 ln -sfn "$(command -v fdfind)" "$bin/fd"
 ln -sfn "$(command -v batcat)" "$bin/bat"
 
+# delta: gitconfig's pager. Debian 12 does not package it, so both distros get the same release build.
+delta_version=0.18.2
+if [ "$("$bin/delta" --version 2>/dev/null)" != "delta $delta_version" ]; then
+    tmp=$(mktemp -d)
+    curl -fsSL "https://github.com/dandavison/delta/releases/download/$delta_version/delta-$delta_version-$(uname -m)-unknown-linux-gnu.tar.gz" |
+        tar -xz -C "$tmp" --strip-components 1
+    install -m 755 "$tmp/delta" "$bin/delta"
+    rm -rf "$tmp"
+fi
+
 # mise manages go/node/dotnet. Debian has it from the mise apt repo; elsewhere use the installer (-> ~/.local/bin/mise).
 if ! command -v mise >/dev/null && [ ! -x "$bin/mise" ]; then
     curl -fsSL https://mise.run | sh
@@ -50,4 +60,4 @@ if [ -n "$on_wsl" ]; then
     fi
 fi
 
-echo "deps installed: $(fd --version), $(rg --version | head -1), fzf $("$HOME/.fzf/bin/fzf" --version | cut -d' ' -f1), $(mise --version 2>/dev/null | head -1)"
+echo "deps installed: $(fd --version), $("$bin/delta" --version),$(rg --version | head -1), fzf $("$HOME/.fzf/bin/fzf" --version | cut -d' ' -f1), $(mise --version 2>/dev/null | head -1)"

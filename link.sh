@@ -21,6 +21,12 @@ link() { # link <repo-relative source> <absolute target>
     echo "linked  $dst -> $src"
 }
 
+# git reads ~/.config/git/config as well as ~/.gitconfig, so an old one there would layer over the link
+if [ -f "$HOME/.config/git/config" ] && [ ! -L "$HOME/.config/git/config" ]; then
+    mv "$HOME/.config/git/config" "$HOME/.config/git/config.bak-$stamp"
+    echo "backup  $HOME/.config/git/config -> $HOME/.config/git/config.bak-$stamp (move anything you need into ~/.gitconfig.local)"
+fi
+
 link home/bashrc             "$HOME/.bashrc"
 link home/gitconfig          "$HOME/.gitconfig"
 link home/tmux.conf          "$HOME/.tmux.conf"
