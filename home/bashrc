@@ -106,9 +106,9 @@ export VISUAL=nvim
 #alias l='ls -CF'
 
 # editor
-#alias vi='nvim'
-#alias vim='nvim'
-#alias myprofile='nvim ~/.bashrc'
+alias vi='nvim'
+alias vim='nvim'
+alias myprofile='nvim ~/.bashrc'
 
 # tmux
 #alias ta='tmux attach -t'
