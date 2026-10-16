@@ -25,7 +25,9 @@ if cd "$path" 2>/dev/null; then
   branch=$(git branch --show-current 2>/dev/null)
   # Dirty only counts on a named branch: a detached HEAD shows neither a branch nor
   # the orange. To flag dirty detached worktrees too, drop the [ -n "$branch" ] test.
-  if [ -n "$branch" ] && [ -n "$(git status --porcelain 2>/dev/null)" ]; then
+  # --no-optional-locks: this runs every status-interval, so never take the index lock or
+  # rewrite the index (which would also wake gitsigns in any nvim open on the repo).
+  if [ -n "$branch" ] && [ -n "$(git --no-optional-locks status --porcelain 2>/dev/null)" ]; then
     bg='#ffb86c'  # Dracula orange
   fi
 fi
