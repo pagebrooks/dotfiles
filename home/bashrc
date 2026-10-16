@@ -118,18 +118,33 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Only run neofetch when not in VS Code
-if [ -z "$VSCODE_INJECTION" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+# ~/.local/bin holds nvim, tree-sitter and (on Ubuntu) mise; .profile only adds it for login shells
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) export PATH="$HOME/.local/bin:$PATH" ;; esac
+
+# Only run neofetch when installed and not in VS Code
+if command -v neofetch >/dev/null && [ -z "$VSCODE_INJECTION" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
     neofetch
 fi
 
-eval "$(/usr/bin/mise activate bash)"
+# mise: /usr/bin/mise from the apt repo on Debian, ~/.local/bin/mise from the installer on Ubuntu
+command -v mise >/dev/null && eval "$(mise activate bash)"
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# === WSL (work machine: Ubuntu under Windows Terminal) ===
+if [ -n "${WSL_DISTRO_NAME:-}" ]; then
+    # /etc/wsl.conf turns off appendWindowsPath (slow completion, .exe files shadowing Linux tools).
+    # Keep the few Windows tools nvim and gh rely on reachable: win32yank.exe, explorer.exe, powershell.exe.
+    for d in /mnt/c/Windows/System32 /mnt/c/Windows /mnt/c/Windows/System32/WindowsPowerShell/v1.0; do
+        case ":$PATH:" in *":$d:"*) ;; *) [ -d "$d" ] && PATH="$PATH:$d" ;; esac
+    done
+    # open links in the Windows browser (wslview comes from the wslu package)
+    if command -v wslview >/dev/null; then export BROWSER=wslview; else export BROWSER=explorer.exe; fi
+fi
 
 # global dotnet tools (roslyn-language-server for nvim)
 export PATH="$HOME/.dotnet/tools:$PATH"

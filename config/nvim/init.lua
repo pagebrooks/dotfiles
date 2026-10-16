@@ -20,6 +20,12 @@ vim.opt.ignorecase = true -- Ignore casing when searching
 vim.opt.smartcase = true -- Turn off Ignore case when a capital letter is detected
 vim.opt.termguicolors = true -- turn on 24-bit colors
 
+-- WSL (work machine): read and write the Windows clipboard through win32yank.exe, which install/deps.sh
+-- puts in ~/.local/bin. Named explicitly so nvim does not pick xclip or wl-copy from WSLg first.
+if vim.fn.has("wsl") == 1 then
+    vim.g.clipboard = "win32yank"
+end
+
 
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },

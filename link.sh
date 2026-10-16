@@ -30,3 +30,4 @@ link config/git/ignore       "$HOME/.config/git/ignore"
 link config/mise/config.toml "$HOME/.config/mise/config.toml"
 
 [ -f "$HOME/.bashrc.local" ] || echo "note: no ~/.bashrc.local; create it for secrets and machine-specific settings"
+[ -f "$HOME/.gitconfig.local" ] || echo "note: no ~/.gitconfig.local; create it with [user] email + signingkey and [credential] helpers"

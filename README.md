@@ -1,16 +1,25 @@
 # dotfiles
 
-bash, git, tmux, nvim and mise config, symlinked into `$HOME`.
+bash, git, tmux, nvim and mise config, symlinked into `$HOME`. Works on Debian 12 (personal
+machine) and Ubuntu under WSL with Windows Terminal (work machine) from the same files: bashrc and
+init.lua detect WSL at runtime; per-machine values live in gitignored `.local` files.
 
 ```sh
 git clone <url> ~/projects/dotfiles
-~/projects/dotfiles/link.sh
+cd ~/projects/dotfiles
+install/deps.sh            # apt packages, fd/bat symlinks, mise, fzf; on WSL also win32yank + wsl.conf
+install/nvim.sh            # Neovim release into ~/.local (stable | nightly | vX.Y.Z)
+install/tree-sitter-cli.sh # tree-sitter CLI; nvim-treesitter needs it to build parsers
+./link.sh                  # symlinks; backs up anything real that is in the way
 ```
 
-`home/` maps to `~/.<name>`; `config/` maps to `~/.config/`. Secrets and machine-specific settings
-go in `~/.bashrc.local`, which `bashrc` sources and git ignores.
+`home/` maps to `~/.<name>`; `config/` maps to `~/.config/`.
 
-`install/` has scripts for tools that are not in Debian's packages:
+Per-machine files, never committed:
 
-- `install/nvim.sh [stable|nightly|vX.Y.Z]` — Neovim release into `~/.local`
-- `install/tree-sitter-cli.sh` — tree-sitter CLI; nvim-treesitter needs it to build parsers
+- `~/.bashrc.local` — secrets and local env; sourced at the end of bashrc
+- `~/.gitconfig.local` — `[user] email`, `signingkey`, `[credential]` helpers; included at the end of gitconfig
+
+WSL notes: in Windows Terminal unbind `ctrl+v` (its default paste binding steals nvim's visual-block mode).
+`install/deps.sh` disables `appendWindowsPath` in `/etc/wsl.conf`; bashrc re-adds `System32` so
+`win32yank.exe`, `explorer.exe` and `powershell.exe` stay reachable.
