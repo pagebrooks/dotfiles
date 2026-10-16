@@ -59,7 +59,10 @@ Claude Code creates its worktrees for this repo under `.claude/worktrees/`, whic
   Identity and credential helper come from `~/.gitconfig.local`.
 - **tmux**: prefix `C-a`, `|` and `-` split in the current path, `h/j/k/l` move between panes, vi copy mode.
   The status bar shows the active pane's path and branch (orange when the tree is dirty), battery on laptops,
-  date and the weather.
+  date and the weather. `prefix f` opens the project launcher: a popup listing every directory under
+  `~/projects` and every Claude worktree inside them (`●` marks ones with a session). Picking one switches to
+  its session, creating it on first use with nvim on the left and `claude` on the right. Set `PROJECT_AGENT`
+  (e.g. `claude -c`) or `PROJECT_EDITOR` in `~/.bashrc.local` to change what the panes run.
 - **wezterm**: Dracula, Meslo Nerd Font with JetBrains Mono fallback, F11 fullscreen, Shift+Enter inserts a
   newline in Claude Code.
 - **nvim** (0.12, built-in `vim.pack`): fzf-lua, which-key, gitsigns, nvim-treesitter, mini.statusline,
