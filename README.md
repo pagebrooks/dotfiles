@@ -24,6 +24,8 @@ Per-machine files, never committed:
 
 - `~/.bashrc.local` — secrets and local env; sourced at the end of bashrc
 - `~/.gitconfig.local` — `[user] email`, `signingkey`, `[credential]` helpers; included at the end of gitconfig
+- `~/.claude/CLAUDE.md` — machine-specific Claude Code instructions (e.g. work stack and branch model); the shared
+  ones are `config/claude/rules/personal.md`, linked into `~/.claude/rules/`
 
 To try the bootstrap on a clean image, see the comment at the top of `Containerfile.debian`.
 

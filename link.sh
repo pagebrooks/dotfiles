@@ -35,6 +35,7 @@ link config/nvim             "$HOME/.config/nvim"      # whole dir: vim.pack rew
 link config/tmux             "$HOME/.config/tmux"
 link config/git/ignore       "$HOME/.config/git/ignore"
 link config/mise/config.toml "$HOME/.config/mise/config.toml"
+link config/claude/rules/personal.md "$HOME/.claude/rules/personal.md" # Claude Code loads ~/.claude/rules/*.md next to ~/.claude/CLAUDE.md
 
 [ -f "$HOME/.bashrc.local" ] || echo "note: no ~/.bashrc.local; create it for secrets and machine-specific settings"
 [ -f "$HOME/.gitconfig.local" ] || echo "note: no ~/.gitconfig.local; create it with [user] email + signingkey and [credential] helpers"
