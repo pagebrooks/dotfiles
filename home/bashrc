@@ -68,24 +68,9 @@ alias vi='nvim'
 alias vim='nvim'
 alias myprofile='nvim ~/.bashrc'
 
-# tmux
-#alias ta='tmux attach -t'
-#alias tn='mkdir -p /tmp/tmux-$(id -u) && tmux new -s'
-#alias tl='tmux ls'
-
-# git (glol is the same idea as `git lg` in gitconfig)
-#alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
-#alias gnuke='git fetch --prune && git --no-pager branch --no-color -vv | grep ": gone\]" | awk '\''{print $1}'\'' | xargs git branch -D'
-#alias gpush='ref=$(git symbolic-ref --quiet HEAD) && git push --set-upstream origin ${ref#refs/heads/}'
-
-# scratch files and misc
-#alias mktmpd='cd "$(mktemp -d)"'
-#alias mktmpf='$EDITOR "$(mktemp)"'
-#alias myip='curl -sSL api.ipify.org; echo'     # work machine had: echo "$(curl -sSL api.ipify.org)"
-#alias myip6='curl -sSL api6.ipify.org; echo'
-#alias weather='curl https://wttr.in'
-#alias newguid='cat /proc/sys/kernel/random/uuid' # work machine had: uuidgen (needs the uuid-runtime package)
-#alias motd='run-parts /etc/update-motd.d'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias myip='curl -sSL api.ipify.org; echo'     # work machine had: echo "$(curl -sSL api.ipify.org)"
+alias weather='curl https://wttr.in'
 
 # Claude Code without a project: ~/chat is empty and not a git repo, so only ~/.claude/CLAUDE.md applies.
 #   chat          interactive session; chat -c continues the last one
