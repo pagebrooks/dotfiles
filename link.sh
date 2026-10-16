@@ -37,22 +37,39 @@ link config/git/ignore       "$HOME/.config/git/ignore"
 link config/mise/config.toml "$HOME/.config/mise/config.toml"
 link config/claude/rules/personal.md "$HOME/.claude/rules/personal.md" # Claude Code loads ~/.claude/rules/*.md next to ~/.claude/CLAUDE.md
 link config/claude/statusline.sh     "$HOME/.claude/statusline.sh"      # settings.json statusLine runs it
+link config/claude/hooks             "$HOME/.claude/hooks"              # settings.json PostToolUse hook: nvim follows Claude
 
 # ~/.claude/settings.json stays a per-machine file because Claude Code rewrites it (/config, /model);
-# only the statusLine key is set from here. cat > keeps the file's permissions.
+# only the statusLine key and the nvim-follow hook are set from here. cat > keeps the file's permissions.
 settings="$HOME/.claude/settings.json"
 statusline_cmd='~/.claude/statusline.sh'
+hook_cmd='~/.claude/hooks/nvim-follow.sh'
+hook_matcher='EnterWorktree|ExitWorktree|Edit|Write|MultiEdit|NotebookEdit'
 if ! command -v jq >/dev/null; then
-    echo "note: jq missing (install/deps.sh); set statusLine in $settings by hand"
-elif [ -f "$settings" ] && [ "$(jq -r '.statusLine.command // empty' "$settings")" = "$statusline_cmd" ]; then
-    echo "ok      statusLine in $settings"
+    echo "note: jq missing (install/deps.sh); set statusLine and the PostToolUse hook in $settings by hand"
 else
     [ -f "$settings" ] || echo '{}' > "$settings"
-    tmp=$(mktemp)
-    jq --arg cmd "$statusline_cmd" '.statusLine = { type: "command", command: $cmd }' "$settings" > "$tmp"
-    cat "$tmp" > "$settings"
-    rm -f "$tmp"
-    echo "set     statusLine in $settings -> $statusline_cmd"
+    if [ "$(jq -r '.statusLine.command // empty' "$settings")" = "$statusline_cmd" ]; then
+        echo "ok      statusLine in $settings"
+    else
+        tmp=$(mktemp)
+        jq --arg cmd "$statusline_cmd" '.statusLine = { type: "command", command: $cmd }' "$settings" > "$tmp"
+        cat "$tmp" > "$settings"
+        rm -f "$tmp"
+        echo "set     statusLine in $settings -> $statusline_cmd"
+    fi
+    # added once; any other hooks already in the file are left alone
+    if [ "$(jq -r --arg cmd "$hook_cmd" '[.hooks.PostToolUse[]?.hooks[]? | select(.command == $cmd)] | length' "$settings")" != "0" ]; then
+        echo "ok      nvim-follow hook in $settings"
+    else
+        tmp=$(mktemp)
+        jq --arg cmd "$hook_cmd" --arg m "$hook_matcher" \
+            '.hooks.PostToolUse = ((.hooks.PostToolUse // []) + [{ matcher: $m, hooks: [{ type: "command", command: $cmd, async: true }] }])' \
+            "$settings" > "$tmp"
+        cat "$tmp" > "$settings"
+        rm -f "$tmp"
+        echo "set     nvim-follow hook in $settings -> $hook_cmd"
+    fi
 fi
 
 [ -f "$HOME/.bashrc.local" ] || echo "note: no ~/.bashrc.local; create it for secrets and machine-specific settings"

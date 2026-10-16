@@ -89,6 +89,10 @@ wk.add({
     { "<leader>l", group = "lsp" },
 })
 
+-- === Claude Code: follow it into worktrees, see what it edited, send it files (lua/claude.lua) ===
+-- Driven by the PostToolUse hook in config/claude/hooks/nvim-follow.sh; link.sh wires it into settings.json.
+require("claude").setup()
+
 -- === gitsigns: see what changed (e.g. what Claude just edited) and act on it per hunk ===
 local gs = require("gitsigns")
 gs.setup({
