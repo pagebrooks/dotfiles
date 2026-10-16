@@ -24,6 +24,7 @@ link() { # link <repo-relative source> <absolute target>
 link home/bashrc             "$HOME/.bashrc"
 link home/gitconfig          "$HOME/.gitconfig"
 link home/tmux.conf          "$HOME/.tmux.conf"
+link home/wezterm.lua        "$HOME/.wezterm.lua"
 link config/nvim             "$HOME/.config/nvim"      # whole dir: vim.pack rewrites the lockfile in place
 link config/tmux             "$HOME/.config/tmux"
 link config/git/ignore       "$HOME/.config/git/ignore"

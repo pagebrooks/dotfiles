@@ -90,11 +90,19 @@ fi
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
+export EDITOR=nvim
+export VISUAL=nvim
 alias vi='nvim'
 alias vim='nvim'
 alias ta='tmux attach -t'
 alias tn='mkdir -p /tmp/tmux-$(id -u) && tmux new -s'
 alias tl='tmux ls'
+alias mktmpd='cd "$(mktemp -d)"'
+alias mktmpf='$EDITOR "$(mktemp)"'
+alias myip='curl -sSL api.ipify.org; echo'
+alias myip6='curl -sSL api6.ipify.org; echo'
+alias weather='curl https://wttr.in'
+alias newguid='cat /proc/sys/kernel/random/uuid'
 
 #alias l='ls -CF'
 

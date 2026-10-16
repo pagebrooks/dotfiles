@@ -1,0 +1,26 @@
+# Clean Debian 12 image for testing the bootstrap from scratch.
+#   podman build -t dotfiles-test -f Containerfile.debian .
+#   podman run --rm -it dotfiles-test
+# then inside:
+#   install/deps.sh && install/nvim.sh && install/tree-sitter-cli.sh && ./link.sh && nvim --headless +qa
+FROM debian:bookworm
+
+ENV DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC
+RUN apt-get update && apt-get install -y --no-install-recommends sudo ca-certificates curl git locales \
+    && rm -rf /var/lib/apt/lists/*
+RUN sed -i 's/^# \(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# non-root user with passwordless sudo, like a real machine
+ARG USER=dev
+ARG UID=1000
+ARG GID=1000
+RUN groupadd -g ${GID} ${USER} \
+    && useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USER} \
+    && echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-${USER} \
+    && chmod 0440 /etc/sudoers.d/90-${USER}
+
+USER ${USER}
+WORKDIR /home/${USER}/projects/dotfiles
+COPY --chown=${UID}:${GID} . .
+CMD ["bash"]

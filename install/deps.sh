@@ -7,7 +7,7 @@ bin="$HOME/.local/bin"
 mkdir -p "$bin"
 on_wsl=${WSL_DISTRO_NAME:-}
 
-pkgs=(git curl ca-certificates build-essential unzip ripgrep fd-find bat tmux)
+pkgs=(git curl ca-certificates build-essential unzip ripgrep fd-find bat tmux gh jq htop bc)
 if [ -n "$on_wsl" ]; then
     pkgs+=(wslu) # wslview: open URLs in the Windows browser
 fi
