@@ -26,6 +26,10 @@ if vim.fn.has("wsl") == 1 then
     vim.g.clipboard = "win32yank"
 end
 
+-- vim-tmux-navigator: <C-h/j/k/l> move between nvim splits, and at an edge on to the next tmux pane
+-- (tmux.conf has the matching bindings). Settings must be set before the plugin loads.
+vim.g.tmux_navigator_no_wrap = 1 -- stop at the outer edge instead of wrapping to the far side
+vim.g.tmux_navigator_disable_when_zoomed = 1 -- a zoomed pane stays zoomed
 
 vim.pack.add({
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
@@ -34,6 +38,7 @@ vim.pack.add({
     { src = "https://github.com/folke/which-key.nvim" }, -- popup of available keys after a prefix
     { src = "https://github.com/lewis6991/gitsigns.nvim" }, -- git gutter, hunk navigation, stage/reset per hunk
     { src = "https://github.com/seblyng/roslyn.nvim" }, -- C#: drives the Roslyn language server (same one VS Code uses)
+    { src = "https://github.com/christoomey/vim-tmux-navigator" }, -- <C-h/j/k/l> across nvim splits and tmux panes
     -- Color Schemes
     { src = "https://github.com/vague-theme/vague.nvim" },
     { src = "https://github.com/dracula/vim.git" }

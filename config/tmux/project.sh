@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Project launcher: pick a directory under ~/projects (or one of its Claude worktrees) and switch to a
-# tmux session for it. First use creates the session with the two-pane layout: nvim on the left,
-# claude on the right. Later uses just switch, so a session per project accumulates state all day.
+# tmux session for it. First use creates the session with the two-pane layout: claude on the left,
+# nvim on the right with the focus. Later uses just switch, so a session per project accumulates state all day.
 #
 # tmux.conf binds it to prefix + f in a popup. Usage: project.sh [dir | --list]
 #   PROJECTS       root to scan (default ~/projects)
-#   PROJECT_EDITOR command for the left pane (default nvim)
-#   PROJECT_AGENT  command for the right pane (default claude; e.g. "claude -c" to resume the last session)
+#   PROJECT_AGENT  command for the left pane (default claude; e.g. "claude -c" to resume the last session)
+#   PROJECT_EDITOR command for the right pane (default nvim)
 set -euo pipefail
 PATH="$HOME/.fzf/bin:$HOME/.local/bin:$PATH" # popups run a non-interactive shell: no .bashrc, no fzf on PATH
 
@@ -53,10 +53,9 @@ fi
 name=$(session_name "$dir")
 if ! tmux has-session -t "=$name" 2>/dev/null; then
     tmux new-session -d -s "$name" -c "$dir" -n main
-    tmux send-keys -t "=$name:main" "$editor" C-m
-    tmux split-window -h -t "=$name:main" -c "$dir"
     tmux send-keys -t "=$name:main" "$agent" C-m
-    tmux select-pane -t "=$name:main" -L
+    tmux split-window -h -t "=$name:main" -c "$dir" # the new pane, on the right, becomes active
+    tmux send-keys -t "=$name:main" "$editor" C-m
 fi
 
 if [ -n "${TMUX:-}" ]; then
