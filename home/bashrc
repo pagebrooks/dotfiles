@@ -14,16 +14,15 @@ if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX" ] && [[ "$TERM" != screen* ]]
     exec tmux new-session
 fi
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=10000
-HISTFILESIZE=20000
+# === History ===
+# Unlimited, timestamped, shared across every tmux pane: __prompt (below) runs `history -a; history -n`
+# after each command, so Ctrl-R in one shell sees what was typed in another.
+HISTCONTROL=ignoreboth:erasedups # skip lines starting with a space and keep only the latest copy of a command
+HISTSIZE=-1
+HISTFILESIZE=-1
+HISTTIMEFORMAT='%F %T '
+HISTIGNORE='ls:ll:la:l:cd:cd -:cd ..:pwd:exit:clear:history:bg:fg:jobs' # not worth recalling
+shopt -s histappend # append to the history file, don't overwrite it
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -32,6 +31,9 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
+
+# `cd maxdop` from anywhere. Not exported on purpose: an exported CDPATH changes what `cd` means in scripts.
+CDPATH=.:$HOME/projects
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -135,6 +137,7 @@ export PATH="$HOME/.dotnet/tools:$PATH"
 PROMPT_DIRTRIM=3
 __prompt() {
     local status=$? host="" char_color='\[\e[38;2;189;147;249m\]' # Dracula purple
+    history -a; history -n # write this shell's new commands, pull in the other panes' (see History above)
     [ "$status" -ne 0 ] && char_color='\[\e[38;2;255;85;85m\]'     # Dracula red
     [ -n "${SSH_CONNECTION:-}" ] && host='\[\e[38;2;255;184;108m\]\u@\h\[\e[0m\] ' # Dracula orange
     PS1="${host}\[\e[38;2;139;233;253m\]\w\[\e[0m\] ${char_color}❯\[\e[0m\] "

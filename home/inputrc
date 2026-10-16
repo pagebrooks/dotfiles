@@ -1,0 +1,7 @@
+# Readline: the line editor behind bash, python, psql and anything else that reads a line interactively.
+# Linked to ~/.inputrc by link.sh. Readline skips /etc/inputrc once ~/.inputrc exists, so pull it in first:
+# Debian and Ubuntu keep the Home/End/Delete key bindings there.
+$include /etc/inputrc
+
+# completion candidates colored like `ls` (directories, symlinks, executables)
+set colored-stats on

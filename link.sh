@@ -31,6 +31,7 @@ link home/bashrc             "$HOME/.bashrc"
 link home/gitconfig          "$HOME/.gitconfig"
 link home/tmux.conf          "$HOME/.tmux.conf"
 link home/wezterm.lua        "$HOME/.wezterm.lua"
+link home/inputrc            "$HOME/.inputrc"
 link config/nvim             "$HOME/.config/nvim"      # whole dir: vim.pack rewrites the lockfile in place
 link config/tmux             "$HOME/.config/tmux"
 link config/git/ignore       "$HOME/.config/git/ignore"

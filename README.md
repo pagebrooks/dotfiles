@@ -32,7 +32,7 @@ lockfile revisions and nvim-treesitter builds the parsers.
 
 ## Layout
 
-- `home/<name>` → `~/.<name>`: `bashrc`, `gitconfig`, `tmux.conf`, `wezterm.lua`
+- `home/<name>` → `~/.<name>`: `bashrc`, `inputrc`, `gitconfig`, `tmux.conf`, `wezterm.lua`
 - `config/<dir>` → `~/.config/<dir>`: `nvim/` (whole dir, so vim.pack keeps the lockfile in the repo),
   `tmux/` (status bar scripts), `git/ignore`, `mise/config.toml`
 - `config/claude/` → `~/.claude/`: `rules/personal.md`, `statusline.sh`, `hooks/`
@@ -54,7 +54,8 @@ Claude Code creates its worktrees for this repo under `.claude/worktrees/`, whic
 
 - **Shell**: every new terminal tab execs its own tmux session. The prompt is the directory and `❯`, red after a
   failed command, with `user@host` only over SSH; branch and dirty state are in the tmux bar instead.
-  `EDITOR` is nvim. Aliases: `vi`/`vim`, `glol`, `myip`, `weather`, `myprofile`.
+  History is unlimited, timestamped, and shared across panes as you type. `cd <project>` works from anywhere
+  via `CDPATH`. `EDITOR` is nvim. Aliases: `vi`/`vim`, `glol`, `myip`, `weather`, `myprofile`.
 - **git**: SSH-signed commits, `delta` as pager, `pull.rebase`, `push.autoSetupRemote`, `main` as default branch.
   Identity and credential helper come from `~/.gitconfig.local`.
 - **tmux**: prefix `C-a`, `|` and `-` split in the current path, vi copy mode. `Ctrl+h/j/k/l` move between
