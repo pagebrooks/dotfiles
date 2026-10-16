@@ -7,6 +7,27 @@
 	pager = delta
 [interactive]
 	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+	syntax-theme = Dracula
+	# Dracula red/green blended into the #282a36 background: lines at 20%, changed words at 40%
+	minus-style = syntax "#53333c"
+	minus-emph-style = syntax "#7e3b42"
+	plus-style = syntax "#305444"
+	plus-emph-style = syntax "#387d52"
+	zero-style = syntax
+	line-numbers-minus-style = "#ff5555"
+	line-numbers-plus-style = "#50fa7b"
+	line-numbers-zero-style = "#6272a4"
+	line-numbers-left-style = "#44475a"
+	line-numbers-right-style = "#44475a"
+	file-style = "#bd93f9" bold
+	file-decoration-style = "#bd93f9" ul
+	hunk-header-style = file line-number syntax
+	hunk-header-file-style = "#8be9fd"
+	hunk-header-line-number-style = "#f1fa8c"
+	hunk-header-decoration-style = "#6272a4" box
 [gpg]
 	format = ssh
 [commit]
