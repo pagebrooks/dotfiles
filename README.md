@@ -26,6 +26,8 @@ Per-machine files, never committed:
 - `~/.gitconfig.local` — `[user] email`, `signingkey`, `[credential]` helpers; included at the end of gitconfig
 - `~/.claude/CLAUDE.md` — machine-specific Claude Code instructions (e.g. work stack and branch model); the shared
   ones are `config/claude/rules/personal.md`, linked into `~/.claude/rules/`
+- `~/.claude/settings.json` — Claude Code rewrites it, so it stays per-machine; `link.sh` only sets its `statusLine`
+  to `~/.claude/statusline.sh` (linked from `config/claude/statusline.sh`)
 
 To try the bootstrap on a clean image, see the comment at the top of `Containerfile.debian`.
 

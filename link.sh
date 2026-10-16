@@ -36,6 +36,24 @@ link config/tmux             "$HOME/.config/tmux"
 link config/git/ignore       "$HOME/.config/git/ignore"
 link config/mise/config.toml "$HOME/.config/mise/config.toml"
 link config/claude/rules/personal.md "$HOME/.claude/rules/personal.md" # Claude Code loads ~/.claude/rules/*.md next to ~/.claude/CLAUDE.md
+link config/claude/statusline.sh     "$HOME/.claude/statusline.sh"      # settings.json statusLine runs it
+
+# ~/.claude/settings.json stays a per-machine file because Claude Code rewrites it (/config, /model);
+# only the statusLine key is set from here. cat > keeps the file's permissions.
+settings="$HOME/.claude/settings.json"
+statusline_cmd='~/.claude/statusline.sh'
+if ! command -v jq >/dev/null; then
+    echo "note: jq missing (install/deps.sh); set statusLine in $settings by hand"
+elif [ -f "$settings" ] && [ "$(jq -r '.statusLine.command // empty' "$settings")" = "$statusline_cmd" ]; then
+    echo "ok      statusLine in $settings"
+else
+    [ -f "$settings" ] || echo '{}' > "$settings"
+    tmp=$(mktemp)
+    jq --arg cmd "$statusline_cmd" '.statusLine = { type: "command", command: $cmd }' "$settings" > "$tmp"
+    cat "$tmp" > "$settings"
+    rm -f "$tmp"
+    echo "set     statusLine in $settings -> $statusline_cmd"
+fi
 
 [ -f "$HOME/.bashrc.local" ] || echo "note: no ~/.bashrc.local; create it for secrets and machine-specific settings"
 [ -f "$HOME/.gitconfig.local" ] || echo "note: no ~/.gitconfig.local; create it with [user] email + signingkey and [credential] helpers"
