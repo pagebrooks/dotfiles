@@ -17,10 +17,11 @@ config.use_fancy_tab_bar = false
 config.window_background_opacity = 0.9
 config.window_decorations = "NONE"
 
--- Windows (work machine): wezterm runs on Windows and opens a WSL shell. %USERPROFILE%\.wezterm.lua is a
+-- WSL: wezterm runs on Windows and opens a WSL shell. %USERPROFILE%\.wezterm.lua is a
 -- stub from install/wezterm-windows.sh that loads this file over \\wsl.localhost and sets default_domain.
 if wezterm.target_triple:find 'windows' then
   config.window_decorations = "RESIZE" -- no title bar, but the window can still be resized and snapped
+  config.window_background_opacity = 1.0
 end
 
 -- Workaround for wezterm <= 20240203 dropping fullscreen on alt-tab under
