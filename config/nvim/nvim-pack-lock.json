@@ -17,6 +17,10 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
+    "oil.nvim": {
+      "rev": "d3733d933833a0e59b813ecec99341527adf0c28",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
     "roslyn.nvim": {
       "rev": "bf1bd4e70bc7068d1b4aebf4ce03cc19a86615be",
       "src": "https://github.com/seblyng/roslyn.nvim"

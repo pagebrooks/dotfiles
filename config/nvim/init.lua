@@ -39,6 +39,7 @@ vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" }, -- git gutter, hunk navigation, stage/reset per hunk
     { src = "https://github.com/seblyng/roslyn.nvim" }, -- C#: drives the Roslyn language server (same one VS Code uses)
     { src = "https://github.com/christoomey/vim-tmux-navigator" }, -- <C-h/j/k/l> across nvim splits and tmux panes
+    { src = "https://github.com/stevearc/oil.nvim" }, -- a directory is an editable buffer; replaces netrw for `nvim .`
     -- Color Schemes
     { src = "https://github.com/vague-theme/vague.nvim" },
     { src = "https://github.com/dracula/vim.git" }
@@ -83,6 +84,15 @@ map("n", "<leader>fw", fzf.git_worktrees, { desc = "Git worktrees" })
 map("n", "<leader>fr", fzf.resume, { desc = "Resume last picker" })
 map("n", "<leader>fh", fzf.helptags, { desc = "Help tags" })
 map("n", "<leader>fk", fzf.keymaps, { desc = "Keymaps (search by description)" })
+
+-- === oil.nvim: a directory opens as a buffer; rename by editing, add/delete lines, :w applies it ===
+-- default_file_explorer turns netrw off, so `nvim .` and :e <dir> open oil instead.
+require("oil").setup({
+    default_file_explorer = true,
+    columns = {}, -- no icon column; no Nerd Font dependency (same as fzf-lua)
+    view_options = { show_hidden = true }, -- netrw showed dotfiles; keep that
+})
+map("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory (oil)" })
 
 -- === which-key: press a prefix (space, g, z, ], ...) and pause to see what follows ===
 local wk = require("which-key")
