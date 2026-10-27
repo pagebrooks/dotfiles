@@ -34,10 +34,23 @@
 	gpgsign = true
 [init]
 	defaultBranch = main
+# Linear history: pull and merge fast-forward only; rebase feature branches onto their base.
+# Release and hotfix branches are the exception, so pass --no-ff explicitly when merging those.
 [pull]
 	rebase = true
+	ff = only
+[merge]
+	ff = only
+[rebase]
+	autoStash = true
+	updateRefs = true
+[branch]
+	autoSetupRebase = always
+[rerere]
+	enabled = true
 [push]
 	autoSetupRemote = true
+	default = current
 # Merged from this repo and the WSL work machine; all commented out until reviewed.
 # Work-only ones (ch, up, pr, repo) are in the work machine's ~/.gitconfig.local.
 [alias]
