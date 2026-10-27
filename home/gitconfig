@@ -32,6 +32,8 @@
 	format = ssh
 [commit]
 	gpgsign = true
+	# Conventional Commits reminder shown in the editor; its # lines are stripped from the message
+	template = ~/.config/git/message
 [init]
 	defaultBranch = main
 # Linear history: pull and merge fast-forward only; rebase feature branches onto their base.

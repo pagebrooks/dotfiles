@@ -1,0 +1,15 @@
+
+# ── Conventional Commits ─────────────────────────────────────────────
+# <type>(<scope>): <subject>          subject ≤ 72 chars, imperative, no period
+#
+# <body>                              wrap at 72; say why, and what changed in
+#                                     behaviour, not how the diff reads
+#
+# <footer>                            BREAKING CHANGE: …   Refs: #123   Closes #45
+#
+# type:  feat  fix  refactor  perf  test  docs  build  ci  chore  revert
+# scope: the area touched (pipeline, watcher, infra, docs, deps …)
+# !      after the type/scope marks a breaking change: feat(api)!: …
+#
+# One logical change per commit. No AI attribution trailers.
+# These # lines are stripped; everything else above them is the message.

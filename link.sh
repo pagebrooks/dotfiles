@@ -35,6 +35,7 @@ link home/inputrc            "$HOME/.inputrc"
 link config/nvim             "$HOME/.config/nvim"      # whole dir: vim.pack rewrites the lockfile in place
 link config/tmux             "$HOME/.config/tmux"
 link config/git/ignore       "$HOME/.config/git/ignore"
+link config/git/message      "$HOME/.config/git/message" # commit.template: Conventional Commits reminder
 link config/mise/config.toml "$HOME/.config/mise/config.toml"
 link config/claude/rules/personal.md "$HOME/.claude/rules/personal.md" # Claude Code loads ~/.claude/rules/*.md next to ~/.claude/CLAUDE.md
 link config/claude/statusline.sh     "$HOME/.claude/statusline.sh"      # settings.json statusLine runs it
